@@ -1,0 +1,23 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    container_name: db
+    environment:
+      MONGO_INITDB_DATABASE: myapp
+    ports:
+      - "27017:27017"
